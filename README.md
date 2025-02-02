@@ -3,9 +3,11 @@
 This work is licensed under CC BY-NC-SA 4.0. See LICENSE for details.
 For commercial inquiries, contact alan.gallauresi@gmail.com.
 
-# The Geosodic Tree: Canonical Meltdown-Free Expansions
+# Various Pinion Theory Proofs
 
-This repository contains the formal proof of the **Geosodic Tree**, a meltdown-free expansion structure ensuring irreversible, balanced growth in computational models.
+This repository contains the formal proof of the **Geosodic Tree**, a meltdown-free expansion structure ensuring irreversible, balanced growth in computational models. 
+
+It also includes the **Countdown Proof**, which rigorously embeds all Countdown expressions into a depth-5 meltdown-free tree, proving injectivity and structural integrity.  
 
 ## 📜 Citation  
 If you use this work, please cite it as:  
@@ -16,5 +18,13 @@ If you use this work, please cite it as:
   title     = {The Geosodic Tree: Canonical Meltdown-Free Expansions},
   year      = {2025},
   archivePrefix = {Zenodo},
-  url       = {https://github.com/yourusername/geosodic-proof}
+  url       = {https://github.com/publicproofs/geosodic-proof}
+}
+
+@article{gallauresi2025countdown,
+  author    = {Alan Gallauresi},
+  title     = {Meltdown-Free Embedding of the Countdown Puzzle in Geosodic Structures},
+  year      = {2025},
+  archivePrefix = {Zenodo},
+  url       = {https://github.com/publicproofs/countdown-proof}
 }
