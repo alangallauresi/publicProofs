@@ -18,7 +18,7 @@ If you use this work, please cite it as:
   title     = {The Geosodic Tree: Canonical Meltdown-Free Expansions},
   year      = {2025},
   archivePrefix = {Zenodo},
-  url       = {https://github.com/publicproofs/geosodic-proof}
+  url       = {https://github.com/publicproofs/geosodic}
 }
 
 @article{gallauresi2025countdown,
@@ -26,5 +26,5 @@ If you use this work, please cite it as:
   title     = {Meltdown-Free Embedding of the Countdown Puzzle in Geosodic Structures},
   year      = {2025},
   archivePrefix = {Zenodo},
-  url       = {https://github.com/publicproofs/countdown-proof}
+  url       = {https://github.com/publicproofs/countdown}
 }
