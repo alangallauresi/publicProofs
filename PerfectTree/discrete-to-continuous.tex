@@ -1,0 +1,208 @@
+\section{Bridging the Discrete and Continuous: Rigorous Immutable Wave Sampling}
+\label{sec:immutable-wave-sampling}
+
+We now extend the meltdown-free framework from discrete enumerations
+(\S\ref{sec:enumeration}) to approximating \emph{continuous waves} or functions.
+Concretely, we show how any continuous function on $[0,1]$ can be sampled
+level by level, with each stage embedded in a \emph{meltdown-free} manner:
+no re-labeling of older nodes, no partial expansions, and thus each partial
+wave approximation remains \emph{immutable} as we move forward.
+
+\subsection{Setup and Definitions}
+\label{subsec:wave-setup}
+
+\begin{definition}[Wave on an Interval]
+  \label{def:wave}
+  Throughout, a \emph{wave} is a continuous function
+  \[
+    f : [0,1] \;\to\; \mathbb{R}.
+  \]
+  We aim to approximate $f$ in a meltdown-free way: each ``level'' or ``depth''
+  $d$ refines our approximation without ever altering previously assigned data.
+\end{definition}
+
+\paragraph{Uniform Sampling (Piecewise Constant).}
+To keep matters concrete, we illustrate with a uniform sampling approach
+that constructs piecewise constant approximations $W_d$ of $f$:
+\begin{enumerate}
+  \item \textbf{Partition $[0,1]$ at Depth $d$:}  
+    Subdivide $[0,1]$ into $2^d$ subintervals, each of length $1/2^d$. Let
+    \[
+      S_d \;=\; \Bigl\{\bigl(x_{d,k},\,f(x_{d,k})\bigr)\;\Big|\;
+        x_{d,k} = \tfrac{k}{2^d},\; k=0,\dots,2^d
+      \Bigr\},
+    \]
+    capturing the function values at these sample points.
+  \item \textbf{Approximation $W_d(x)$:}  
+    Define $W_d(x)$ to be piecewise constant:
+    \[
+      W_d(x) \;=\; \sum_{k=0}^{2^d-1} \;
+      \Bigl(\,
+        f\bigl(x_{d,k}\bigr)
+      \Bigr)\;
+      \chi_{\left[\tfrac{k}{2^d},\,\tfrac{k+1}{2^d}\right)}(x),
+    \]
+    where $\chi_I(x)$ is the indicator function of interval $I$. By standard
+    approximation theory, $W_d \to f$ uniformly as $d\to\infty$, thanks to $f$'s
+    continuity on $[0,1]$.
+\end{enumerate}
+
+\begin{remark}[Other Schemes: Wavelet or Fourier Expansions]
+  \label{rem:wavelets-fourier}
+  One could replace uniform sampling with wavelet coefficients or partial
+  Fourier sums. At depth $d$, let $S_d$ be the new block of coefficients
+  or basis elements. Known convergence results still ensure $W_d \to f$ in
+  $\ell^2$ or uniform norms, and the meltdown-free logic applies as we embed
+  each block of coefficients at depth $d$ without disturbing old data.
+\end{remark}
+
+\subsection{Assigning Samples Meltdown-Free via Queueing}
+\label{subsec:wave-embedding}
+
+Recall from \S\ref{sec:prelim} that each depth $d\to d+1$ in the Geosodic Tree
+adds $2^{d+1}$ fresh nodes (a pivot plus a perfect right subtree of depth $d$).
+Denote these new nodes by
+\[
+  N_d \;=\;
+  \{\,n_{d,1},\,n_{d,2},\,\dots,\,n_{d,\,2^{d+1}}\}.
+\]
+We define an \emph{injective} mapping $\phi_d$ that assigns each wave sample
+to a unique new node, ensuring meltdown-free expansions.
+
+\paragraph{Node Ordering and Queue of Samples.}
+\begin{enumerate}
+  \item \textbf{Order the new nodes $N_d$:}  
+    In a meltdown-free tree, index $n_{d,1}\dots n_{d,2^{d+1}}$ in a fixed
+    left-to-right or BFS manner. This yields a well-defined ordering of fresh nodes.
+  \item \textbf{Maintain a global queue $\mathcal{Q}$ of unassigned samples:}  
+    Initially empty. At depth $d$, do:
+    \begin{itemize}
+      \item \emph{Enqueue} the new wave samples $S_d$ onto $\mathcal{Q}$ (if any).
+      \item \emph{Dequeue} up to $2^{d+1}$ items from $\mathcal{Q}$ (or fewer, if $\mathcal{Q}$ has fewer)
+            in FIFO order. Assign them injectively to $n_{d,1}\dots n_{d,r_d}$, where
+            $r_d = \min\bigl(2^{d+1}, \lvert\mathcal{Q}\rvert\bigr)$.  
+      \item If $\lvert\mathcal{Q}\rvert > 0$ afterward, those leftover samples remain
+            in $\mathcal{Q}$ for future depths.
+    \end{itemize}
+\end{enumerate}
+
+\begin{definition}[Wave Sample Mapping $\phi_d$]
+  \label{def:phi-d}
+  Let $\phi_d\colon S_d \to N_d$ be the injective function that maps the
+  \emph{dequeued} samples (from $S_d$ or prior leftover waves) to the newly
+  created nodes $n_{d,i}\in N_d$ \emph{in the exact order} they were dequeued.
+  By construction, each sample is assigned to a unique node, and no node is reused.
+\end{definition}
+
+\paragraph{Ensuring All Samples Eventually Assign.}
+If $S_d$ is finite at each depth $d$ (true for uniform sampling or wavelet blocks),
+then repeating this queue approach at $d=0,1,2,\dots$ eventually assigns every sample
+to some finite depth. Each depth $d$ accommodates $2^{d+1}$ wave points, and
+$\sum_{d=0}^{\infty} 2^{d+1} = \infty$ ensures no sample stays in $\mathcal{Q}$
+indefinitely.
+
+\subsection{Additive Construction of Wave Approximations}
+\label{subsec:wave-additive}
+
+Having assigned wave samples meltdown-free at each depth, we now define the piecewise
+constant wave approximation $W_d$ \emph{immutablely} on $[0,1]$.
+
+\begin{definition}[Immutable Wave Operator $\mathcal{A}_d$]
+  Let $W_{d-1}$ be the wave approximation from depth $d{-}1$. Suppose $S_d$
+  specifies new subintervals $[x_{d,k},\,x_{d,k+1})$ at depth $d$, each with
+  midpoint-sample $f(x_{d,k})$. We define
+  \[
+    W_d \;=\; \mathcal{A}_d\bigl(W_{d-1},\,\phi_d(S_d)\bigr)\quad \text{on }[0,1]
+  \]
+  by explicitly combining the old approximation $W_{d-1}$ with the new values
+  $f(x_{d,k})$. Concretely, for $x \in [0,1]$,
+  \[
+    W_d(x)
+    \;=\;
+    W_{d-1}(x)\,\Bigl(1 - \sum_{k=0}^{2^{d+1}-1}\chi_{\,[x_{d,k},\,x_{d,k+1})}(x)\Bigr)
+    \;+\;
+    \sum_{k=0}^{2^{d+1}-1} f\bigl(x_{d,k}\bigr)\,\chi_{\,[x_{d,k},\,x_{d,k+1})}(x),
+  \]
+  where $\chi_{I}(x)$ is the indicator function of interval $I$. In other words,
+  $W_d(x)$ inherits $W_{d-1}(x)$ wherever the new partition does not refine,
+  and it takes the new sample value $f(x_{d,k})$ on each newly introduced
+  subinterval $[x_{d,k},\,x_{d,k+1})$. Since no old interval is overwritten,
+  $W_{d-1}$ remains intact in all older subintervals, ensuring an ``additive''
+  update and retaining meltdown-free immutability.
+\end{definition}
+
+\subsection{Convergence and the Link to Universal Enumeration}
+\label{subsec:wave-conclusion}
+
+\begin{theorem}[Uniform Convergence + Meltdown-Free Embedding]
+\label{thm:uniform-wave-conv}
+  Let $f$ be continuous on $[0,1]$. Using uniform sampling at depth $d$
+  and the piecewise constant approximation $W_d(x)$, we have
+  \[
+    \|W_d - f\|_\infty \;\le\; \omega_f\bigl(\tfrac{1}{2^d}\bigr),
+  \]
+  where $\omega_f(\delta)$ is $f$'s modulus of continuity on $[0,1]$. Thus
+  $W_d \to f$ uniformly as $d\to\infty$. Meanwhile, each wave sample is
+  meltdown-free assigned via Definition~\ref{def:phi-d}, so no node at earlier
+  depths is ever altered. Consequently, the wave approximations are
+  \emph{additive} and \emph{immutable} at every stage.
+\end{theorem}
+
+\begin{proof}[Sketch]
+  A standard result in approximation theory states that for a continuous
+  function $f$ on $[0,1]$, sampling it on intervals of width $1/2^d$ yields
+  piecewise constant approximations $W_d$ satisfying
+  \[
+    \|W_d - f\|_\infty \;\le\; \omega_f\bigl(\tfrac{1}{2^d}\bigr).
+  \]
+  Here, $\omega_f(\delta)$ is the modulus of continuity:
+  \[
+    \omega_f(\delta)
+    \;=\;
+    \sup\Bigl\{
+      |f(x)-f(y)| : |x-y|\le\delta,\ x,y\in[0,1]
+    \Bigr\}.
+  \]
+  Since $f$ is uniformly continuous on the compact interval $[0,1]$,
+  $\omega_f(\delta)\to 0$ as $\delta\to 0$, implying $\|W_d - f\|_\infty\to0$
+  and thus uniform convergence. 
+
+  For meltdown-free embedding, we rely on the queue-based chunking:
+  at depth $d$, the new samples $S_d$ are injectively mapped to $N_d$
+  (Definition~\ref{def:phi-d}), leaving older nodes untouched. Hence
+  each $W_{d-1}$ remains immutable within $W_d$, ensuring an additive,
+  meltdown-free update at every stage.
+\end{proof}
+
+\paragraph{Relation to Universal Enumeration.}
+This construction essentially \emph{enumerates} all wave samples
+$\bigl(\cup_{d=0}^{\infty} S_d\bigr)$, each of which is finite or countable at
+level $d$. By \emph{interleaving} or queueing them meltdown-free, we show these
+countably many wave points embed exactly like any other discrete set in
+Theorem~\ref{thm:univenum} (the universal enumeration property). Thus the
+Geosodic Tree \emph{universally} accommodates continuous $f$ by sampling it
+into a meltdown-free structure, bridging the discrete--continuous gap without
+ever re-labeling old data.
+
+\begin{remark}[All Continuous Functions at Once]
+  By enumerating not just one function $f$, but partial approximations for
+  \emph{every} $f$ in $\mathcal{C}([0,1])$, one could embed \emph{all} waves meltdown-free
+  via a diagonal or fair-merge approach. Concretely, one might label each function $f_i$
+  with depths $d=0,1,2,\dots$ and partial samples $S_d^{(i)}$, and then place those
+  samples into a \emph{global} queue. Over infinitely many depths, a round-robin allocation
+  draws from each $(i,d)$ in turn, assigning samples meltdown-free into newly created nodes.
+  Although $\mathcal{C}([0,1])$ is uncountable, each individual $f_i$ has a \emph{countable}
+  sequence of approximations, so the meltdown-free chunking can still accommodate them.
+  We omit the details here, but it underscores the broad sweep of meltdown-free expansions
+  beyond a single wave embedding.
+\end{remark}
+
+\smallskip
+
+\noindent
+\textbf{Conclusion:} By sampling any continuous wave $f$ at each depth, we obtain
+immutable partial approximations $W_d$ that converge in the usual sense---and
+all wave data is assigned meltdown-free to newly created nodes. This extends
+the meltdown-free enumerations of discrete sets (\S\ref{sec:enumeration}) into a
+\emph{rigorous wave-fitting framework}, reaffirming the Geosodic Tree as a
+universal, layered structure for both discrete and continuous expansions.

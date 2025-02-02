@@ -1,0 +1,97 @@
+\subsection{Uniqueness and Canonicity of the Geosodic Tree}
+\label{subsec:uniqueness}
+
+We now show that the \emph{Geosodic Tree} is essentially \emph{the} unique
+(meltdown-free) structure that remains perfectly balanced at each depth,
+expanding from depth $d$ to $d+1$ in a single step with no partial
+insertions or re-labeling. This establishes its \emph{canonicity} among such
+trees.
+
+\begin{theorem}[Uniqueness of the Geosodic Tree]
+\label{thm:geosodic-uniqueness}
+Any rooted binary tree that
+\begin{enumerate}
+  \item maintains a \emph{perfect} shape at each depth,
+  \item expands from depth $d$ to $d+1$ in one step, adding no partial insertions,
+  \item is \emph{meltdown-free} (no re-labeling of existing nodes),
+\end{enumerate}
+is isomorphic to the Geosodic Tree. Moreover, its expansion from depth $d$ to
+$d+1$ is uniquely determined as adding a new root (pivot) plus a perfect right
+subtree of depth $d$.
+\end{theorem}
+
+\begin{proof}[Proof (Strong Induction on Depth)]
+We prove by strong induction on the depth $d$ that under these conditions,
+the resulting tree of depth $d$ must be isomorphic to the Geosodic Tree of
+depth $d$.
+
+\paragraph{Base Case ($d=0$).}
+A perfect binary tree of depth $0$ has exactly $2^{0+1}-1 = 1$ node (just
+the root). The Geosodic Tree at depth $0$ likewise has one root node and no
+other nodes. Therefore, any meltdown-free, perfectly balanced tree of depth~0
+is trivially isomorphic to the Geosodic Tree of depth~0.
+
+\paragraph{Inductive Hypothesis.}
+Assume that for some depth $d \ge 0$, \emph{any} meltdown-free, perfectly
+balanced tree of depth $d$ that expands in a single step (no partial
+insertions) is isomorphic to the Geosodic Tree of depth $d$.
+
+\paragraph{Inductive Step ($d \to d+1$).}
+Let $T$ be a meltdown-free, perfectly balanced tree of depth $d+1$. We must show
+$T$ is isomorphic to the Geosodic Tree of depth $d+1$.
+
+\begin{enumerate}
+  \item \textbf{Node Counts.}
+    A perfect binary tree of depth $d$ contains $2^{d+1}-1$ nodes. A perfect tree
+    of depth $d+1$ must have $2^{(d+1)+1}-1 = 2^{d+2} - 1$ nodes. Hence, going
+    from depth $d$ to $d+1$ requires adding
+    \[
+      \bigl(2^{d+2}-1\bigr)\;-\;\bigl(2^{d+1}-1\bigr)
+      \;=\;
+      2^{d+1}
+    \]
+    new nodes in one step to maintain perfect balance.
+
+  \item \textbf{Structure at Depth $d+1$.}
+    Since $T$ is meltdown-free and expands in a single step from depth $d$ to
+    $d+1$, it must introduce exactly $2^{d+1}$ \emph{new} nodes simultaneously
+    (no partial insertions). Let $T_d$ be the subtree of $T$ up to depth $d$
+    (the “old part”). By the inductive hypothesis, $T_d$ is isomorphic to the
+    Geosodic Tree of depth $d$.
+
+    Because $T$ is perfectly balanced at depth $d+1$, it has one new root node
+    (pivot) \emph{that is distinct from any node in $T_d$}, with $T_d$ as its
+    left subtree. To complete the perfect shape, the newly attached right subtree
+    must also contain $2^{d+1}-1$ nodes (so that the total is $2^{d+2}-1$ at
+    depth $d+1$). That right subtree is itself a perfect binary tree of depth $d$.
+
+  \item \textbf{Isomorphism to the Geosodic Tree.}
+    This construction---a new pivot node on top, the old depth-$d$ tree on the
+    left, and a perfect subtree of depth $d$ on the right---is precisely how the
+    Geosodic Tree of depth $d+1$ is formed. Namely, the Geosodic Tree also
+    attaches a new pivot plus a perfect right subtree of depth $d$ to
+    its (already isomorphic) depth-$d$ tree. Thus $T$ matches the Geosodic
+    structure at depth $d+1$ up to node renaming, i.e.\ they are isomorphic.
+\end{enumerate}
+
+By strong induction, any meltdown-free, perfectly balanced tree of depth $d$,
+expanded in single steps with no partial insertions, is isomorphic to the
+Geosodic Tree of the same depth.
+\end{proof}
+
+\paragraph{Canonical Implications.}
+Theorem~\ref{thm:geosodic-uniqueness} shows there is essentially \emph{no other}
+meltdown-free tree that remains perfectly balanced at each depth and grows
+exactly one step from $d$ to $d+1$. Thus the Geosodic Tree can be viewed as the
+\emph{canonical} (or unique) structure under these constraints. In particular,
+any different choice of adding nodes or rearranging them at intermediate depths
+would break meltdown-free conditions, fail perfect balance, or require partial
+insertions---none of which is allowed. Consequently, the minimal-step growth
+(pivot + perfect subtree) is forced. 
+
+\emph{This uniqueness has important implications for representing both discrete
+enumerations and continuous functions. Since the structure of the tree is
+uniquely determined by the constraints, the embedding of any given enumeration
+or sampling scheme is also uniquely determined (up to the initial ordering of
+nodes at each level). This establishes the Geosodic Tree as a truly canonical
+framework for meltdown-free expansions.}

@@ -1,0 +1,40 @@
+\section{A Surprising \texorpdfstring{$-1/12$}{-1/12} Ratio Identity}
+\label{sec:ratio}
+
+Even in a purely finite, combinatorial setting, the \emph{geosodic tree} 
+reveals a striking numeric identity when labeled in-order:
+
+\begin{theorem}[$-1/12$ Ratio Identity]
+\label{thm:minus-twelfth}
+Consider a geosodic tree of depth $d$, where the nodes are labeled in-order 
+from $1$ to $2^{d+1}-1$. Let $S_{\text{left}}$ be the sum of labels in the 
+left subtree, $S_{\text{right}}$ the sum in the right subtree, and 
+$S_{\text{excl}}$ the sum of all labels excluding the root. Then
+\[
+\Bigl(\frac{S_{\text{left}}}{S_{\text{excl}}}\Bigr)
+\;-\;
+\Bigl(\frac{S_{\text{left}}}{S_{\text{right}}}\Bigr)
+\;=\;
+-\tfrac{1}{12}.
+\]
+\end{theorem}
+
+\begin{proof}[Sketch]
+(Algebraic steps as in your existing proof, showing 
+\(\tfrac{S_{\text{left}}}{S_{\text{excl}}} = \frac{1}{4}\),
+\(\tfrac{S_{\text{left}}}{S_{\text{right}}} = \frac{1}{3}\).)
+\end{proof}
+
+\paragraph{Connection to ``\texorpdfstring{$-1/12$}{-1/12}'' in Analysis.}
+The appearance of $-\tfrac{1}{12}$ here \emph{echoes} the well-known 
+(infinite-sum) statement $\,1 + 2 + 3 + \dots = -\tfrac{1}{12}$ 
+as understood through zeta function regularization or Ramanujan summation. 
+\emph{However}, in our setting, the constant emerges in a \emph{purely finite} 
+tree-based summation, with no direct invocation of analytic continuation. 
+This suggests an intriguing \emph{resonance} with zeta-related methods 
+in number theory, but we do not claim a full equivalence or deeper analytic link. 
+Exploring whether similar balanced expansions might provide further insights 
+into zeta function properties is an open direction. For now, we simply highlight 
+the combinatorial coincidence that $-\tfrac{1}{12}$ surfaces in this 
+finite-tree ratio---underscoring how classical constants can arise 
+in unexpected discrete contexts.

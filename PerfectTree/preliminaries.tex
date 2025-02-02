@@ -1,0 +1,162 @@
+\section{Preliminaries: Defining the Geosodic Tree}
+\label{sec:prelim}
+
+We now define the \emph{Geosodic Tree}, a structure that grows by 
+``pivot + fully formed right subtree'' steps at each depth, 
+thus remaining \emph{meltdown-free}: 
+no pre-existing node is ever re-labeled or partially altered when moving 
+from depth $d$ to $d+1$. The result is a \emph{perfectly balanced} tree 
+at each level, eventually labeled in-order upon completion.
+
+\subsection{Construction at Each Depth}
+\label{subsec:construction}
+
+At \emph{depth} $0$, we begin with a single node $r$ (the root). To go from a Geosodic Tree
+of depth $d$ to depth $d+1$, we do the following:
+
+\begin{enumerate}
+  \item \textbf{Add a new pivot node as the root,} making the old depth-$d$ tree its left subtree.
+  \item \textbf{Attach a perfect right subtree of depth $d$}, which has $2^{d+1}-1$ nodes,
+        plus the pivot (1 node) added in Step~1, for a total of $2^{d+1}$ new nodes.
+\end{enumerate}
+
+Since a perfect binary tree of depth $d$ contains $2^{d+1}-1$ nodes, 
+adding one such subtree on the right (and the new pivot) yields exactly $2^{d+1}$ new nodes 
+when advancing from depth $d$ to $d+1$. 
+
+\paragraph{Resulting Node Count.}
+If the old tree (at depth $d$) had $2^{d+1}-1$ total nodes, adding these $2^{d+1}$ new nodes 
+brings the total to
+\[
+  \bigl(2^{d+1}-1\bigr) + 2^{d+1} 
+  \;=\;
+  2^{d+2}-1,
+\]
+which is precisely a perfect binary tree of depth $d+1$. Once this new level is fully assembled,
+we label the resulting tree \emph{in-order}, though we do \emph{not} perform any 
+key-based insertions as in BSTs.
+
+\input{diagram-building-tree.tex}
+
+\begin{definition}[Geosodic Tree]
+\label{def:geosodic-tree}
+A \emph{Geosodic Tree} of depth $d$ is a rooted binary tree with $2^{d+1}-1$ nodes,
+obtained by starting at a single node (depth~0) and, for each level $k=0,1,\dots,d-1$, 
+adding exactly $2^{k+1}$ new nodes (one pivot plus a perfect right subtree of depth $k$) 
+to form depth $k+1$. Throughout, no re-labeling or partial reshuffling of old nodes occurs,
+keeping each expansion \emph{meltdown-free}. The final tree at depth $d$ is \emph{perfect} 
+(all leaves at level $d$), \emph{in-order labeled} once assembled, and remains 
+\emph{meltdown-free} at every stage.
+\end{definition}
+
+These steps guarantee:
+\begin{itemize}
+  \item \textbf{Perfect Balance:} Every depth-$d$ tree is a complete binary tree of size $2^{d+1}-1$.
+  \item \textbf{No Partial Insertions:} Each step adds a full subtree of depth $d$ (plus pivot) 
+        rather than single-node insertions.
+  \item \textbf{No Re-labeling (Meltdown-Free):} Old nodes from level $d$ stay intact; 
+        expansions attach only \emph{new} nodes.
+\end{itemize}
+
+\subsection{No Smaller Step Than Doubling}
+\label{subsec:no-smaller}
+
+We justify why one \emph{cannot} add fewer than $2^{d+1}$ new nodes (counting the pivot) 
+when moving from depth $d$ to $d+1$ without violating the geosodic (meltdown-free) properties:
+
+\begin{lemma}[No Smaller Step than Doubling]
+\label{lem:no-smaller-step}
+Let $G_d$ be a Geosodic Tree of depth $d$, which has $2^{d+1}-1$ total nodes 
+and is perfectly balanced. Suppose we attempt to form a depth-$(d+1)$ tree by adding 
+fewer than $2^{d+1}$ new nodes in one expansion step. Then either:
+\begin{enumerate}
+  \item The resulting tree is \emph{not} a perfect binary tree at depth $d+1$, or
+  \item A local restructure (partial rotation, re-labeling, etc.) is needed to fill 
+        or shift nodes, contradicting the meltdown-free principle.
+\end{enumerate}
+Hence, the only way to achieve a depth-$(d+1)$ Geosodic Tree from $G_d$ while preserving 
+perfect balance and no re-labeling is to add exactly $2^{d+1}$ new nodes (one pivot plus a 
+fully formed right subtree of depth $d$). In \S\ref{subsec:uniqueness},
+we will prove this condition uniquely forces the Geosodic Tree structure
+at each depth, making it \emph{canonical} among meltdown-free expansions.
+
+\begin{proof}[Proof Sketch]
+A perfect binary tree of depth $d$ has $2^{d+1}-1$ nodes; 
+one of depth $d+1$ must have $2^{(d+1)+1}-1 = 2^{d+2}-1$. 
+Thus, the gap in node count is 
+\[
+  \bigl(2^{d+2}-1\bigr) - \bigl(2^{d+1}-1\bigr) 
+  \;=\;
+  2^{d+1}.
+\]
+If fewer than $2^{d+1}$ new nodes are introduced, the resulting structure 
+cannot reach $2^{d+2}-1$ total nodes at depth $d+1$ without either:
+\begin{itemize}
+  \item Becoming imperfect (missing leaves), or
+  \item Re-labeling or reshuffling older nodes to fill gaps, breaking meltdown-free increments.
+\end{itemize}
+Therefore, the minimal and \emph{unique} meltdown-free expansion consistent with 
+perfect balance is adding $2^{d+1}$ new nodes in one shot: 
+one pivot plus a perfect right subtree of depth $d$ (which contains $2^{d+1}-1$ nodes).
+\end{proof}
+\end{lemma}
+
+\subsection{Distinction from Classic Binary Search Trees}
+\label{sec:distinction}
+
+Readers familiar with \emph{binary search trees} (BSTs) may wonder if Geosodic Trees 
+are merely a variant of \emph{balanced BSTs} (e.g.\ AVL or Red--Black Trees~\cite{Cormen2009}). 
+While both are “binary trees” and can use an in-order labeling, 
+the Geosodic Tree differs fundamentally in its construction and objective:
+
+\begin{itemize}
+    \item \textbf{No Local Re-balancing.}
+    In a self-balancing BST (AVL, Red--Black, etc.), each node insertion 
+    can trigger rotations, effectively “re-labeling” subtrees or changing parent-child links 
+    to maintain height bounds. By contrast, the Geosodic Tree has \emph{no rotations or partial fixes}. 
+    We add a pivot node plus an entire right subtree \emph{at once}, leaving older nodes undisturbed.
+
+    \item \textbf{Minimal, Meltdown-Free Expansions.}
+    BSTs typically support node-by-node insertion. 
+    Our Geosodic Tree \emph{doubles} at each depth—the minimal meltdown-free step 
+    that keeps balance and forbids partial expansions or re-labeling. 
+    Hence, old labels remain stable, which standard BSTs do not guarantee.
+
+    \item \textbf{Different “Ordered” Notion.}
+    A normal BST enforces 
+    \(\text{(left subtree values)} < \text{(node value)} < \text{(right subtree values)}\). 
+    Here, “ordered” means an \emph{in-order labeling} \emph{after} the depth is fully built, 
+    not a key-based ordering \emph{during} insertion.
+
+    \item \textbf{Focus on Enumeration, Not Searching.}
+    Traditional BSTs aim for efficient lookups. 
+    Our Geosodic Tree aims for \emph{universal enumeration} and meltdown-free expansions:
+    each new depth encloses all prior nodes plus a fully formed subtree, 
+    staying perfectly balanced. Searching is incidental—our main results concern 
+    meltdown-free increments and code embeddings, not operational performance.
+\end{itemize}
+
+Thus, while the Geosodic Tree and BSTs both have in-order traversals, 
+they embody \emph{very} different growth principles: local rebalancing or partial insertions 
+in BSTs, versus whole-subtree expansions in meltdown-free steps for Geosodic Trees.
+
+\subsection{DAG Interpretation}
+
+Although we call it a “tree,” one can view a Geosodic Tree as a \emph{directed acyclic graph (DAG)} 
+rooted at the initial node. Each depth adds fresh nodes and edges in a strictly forward direction 
+(from pivot to newly created subtrees). No rearrangement of older edges occurs, preventing cycles 
+or rewiring. Thus, each node has a unique parent (except the root), and there is exactly 
+one directed path from the root to any node. 
+
+This DAG viewpoint further underscores that meltdown-free expansions never alter existing labels 
+or edges—every new depth is just appended, keeping a strict partial order of creation.
+
+\subsection{Auxiliary Labels}
+
+In some proofs, we assign temporary “auxiliary” labels (e.g., 0/1 for left/right paths, 
+or numeric indexing for partial sums). Such \emph{auxiliary} labels do \emph{not} alter 
+the tree’s meltdown-free property—old node identities remain intact, and no re-labeling occurs. 
+These labels are solely for analysis (like referencing paths), consistent with 
+the “no partial expansions” principle.
+
+\input{diagram-labelled.tex} 

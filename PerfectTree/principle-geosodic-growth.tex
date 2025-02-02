@@ -1,0 +1,45 @@
+\subsection{The Principle of Geosodic Bounded Growth}
+\label{subsec:bounded-growth}
+
+We now highlight a geometric consequence of meltdown-free expansions:
+\emph{doubling} occurs at each depth, even if we omit any arithmetic labeling.
+While simple at first glance, this observation underpins the exponential
+and logarithmic patterns that naturally emerge once we (optionally) interpret
+the outer nodes in numeric coordinates.
+
+\begin{corollary}[The Principle of Geosodic Bounded Growth]
+\label{cor:geosodic-bounded-growth}
+In a meltdown-free geosodic tree, each new depth $d+1$ attaches a fully formed
+subtree of depth $d$ plus one pivot node (see Lemma~\ref{lem:no-smaller-step}).
+Hence, the newly created nodes at depth $d+1$ \emph{double} those at depth $d$,
+inducing a bounded-yet-exponential growth pattern in a purely \emph{geometric} sense:
+
+\begin{itemize}
+  \item No numeric labeling is assumed; the doubling follows from adjacency
+  and minimal-step insertion alone.
+  \item If, \emph{after the fact}, we assign in-order labels, the ``outermost''
+  node at depth $d$ becomes label $2^{d-1}$, inverting to $d-1 = \log_2(\text{label})$.
+\end{itemize}
+
+Thus, without any arithmetic preconditions, an exponential--log relationship
+emerges \emph{intrinsically} from meltdown-free expansions.
+\end{corollary}
+
+\begin{proof}[Sketch]
+By the meltdown-free principle (Definition~\ref{def:geosodic-tree} and
+Lemma~\ref{lem:no-smaller-step}), moving from depth $d$ to $d+1$ must
+add exactly $2^{d+1}$ fresh nodes (a pivot plus a perfect subtree of depth~$d$).
+Hence the number of new nodes \emph{doubles} each level, in a purely spatial
+(adjacent) sense, with no relabeling or partial insertions.
+If we later choose to label nodes in-order, it is straightforward
+to see that the outer node at depth $d$ takes label $2^{d-1}$ (e.g.\ 
+root at depth~1 is label~1, next level is label~2, etc.), yielding an
+exponential curve in one axis and a log when inverted.
+\end{proof}
+
+\paragraph{Remark.}
+We stress that this bounded growth is \emph{not} a numerical artifact:
+it arises from the \emph{structure} of pivot+subtree expansions.
+No arithmetic or labeling is needed \emph{a priori}. The doubling
+pattern, and thus its exponential/log inversion, follows inherently
+from meltdown-free adjacency constraints.

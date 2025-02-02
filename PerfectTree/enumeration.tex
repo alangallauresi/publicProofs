@@ -1,0 +1,90 @@
+\section{Universal Enumeration Theorem}
+\label{sec:enumeration}
+
+We now present our main result: a \emph{Geosodic Tree} (see \S\ref{sec:prelim})
+can embed \emph{any} countably infinite discrete family in a minimal-growth, meltdown-free manner.
+
+\subsection{Main Theorem and Proof}
+
+\begin{theorem}[Universal Enumeration]
+\label{thm:univenum}
+Let $\{C_k\}_{k=0}^\infty$ be any infinite discrete enumeration (e.g.\ G\"odel codes, Gray codes, 
+or natural numbers). Then there exists a geosodic tree in which each $C_k$ is assigned to a unique node 
+at some finite depth, with no re-labeling or collisions.
+\end{theorem}
+
+\begin{proof}[Proof via ``Chunking'']
+We construct the geosodic tree \emph{level by level}, assigning chunks of unassigned codes 
+to the newly created nodes at each stage.
+
+\paragraph{Stage 0 (Depth 0).}
+Initialize the tree at depth $0$ with a single root node (total $2^{0+1}-1 = 1$ node). 
+Assign $C_0$ (the first code) to this root. Thus, after stage 0, 
+exactly one code $C_0$ has been placed.
+
+\paragraph{General Stage (Depth $d \to d+1$).}
+Assume we have built a geosodic tree of depth $d$, with $2^{d+1}-1$ total nodes, 
+and assigned $\{C_0, \dots, C_m\}$ to distinct nodes. 
+To form depth $d+1$, we add:
+\begin{itemize}
+  \item One \emph{pivot node} on top (the new root), and
+  \item A perfect right subtree of depth $d$ containing $2^{d+1}-1$ new nodes.
+\end{itemize}
+Hence we introduce a total of $2^{d+1}$ \emph{new} nodes in a single meltdown-free step, 
+bringing the total node count to $(2^{d+1}-1) + 2^{d+1} = 2^{d+2}-1$ at depth $d+1$.
+
+\smallskip
+\emph{Chunking the codes:}
+- Let $r_d = 2^{d+1}$ be the number of newly created nodes at stage $d+1$.
+- Take the next $r_d$ \emph{unassigned} codes, namely $\{C_{m+1}, \dots, C_{m + r_d}\}$.
+- Assign each of these $r_d$ codes \emph{exactly once} to the newly created nodes at depth $d+1$.
+
+If fewer than $r_d$ codes remain unassigned, we simply place all of them now; 
+any new node that does not get a code remains “empty” (unused) at that stage, which is allowed 
+because no old labels are re-labeled and no partial insertion occurs. 
+If more than $r_d$ codes remain, we place exactly $r_d$ of them and move on.
+In either case, $m$ increases by however many codes are placed at this level.
+
+\paragraph{Remark on Irregular Sequences.}
+This chunking strategy does \emph{not} require $\{C_k\}$ to be arranged 
+in contiguous or numeric order. Even if indices jump widely (e.g.\ $C_0, C_{1000}, C_2,\dots$),
+we place whichever unassigned codes arise into the $r_d = 2^{d+1}$ fresh nodes.
+Thus, any “sparse” or out-of-order enumeration still gets fully embedded 
+without altering previously assigned labels.
+
+\paragraph{Why No Collisions or Re-labeling?}
+- \textbf{Collisions:} Each newly created node receives \emph{at most one} code, 
+  distinct from codes placed at earlier depths. Thus, collisions never occur.
+- \textbf{No Re-labeling (Meltdown-Free):} We add \emph{only new} nodes. 
+  Older nodes and labels remain intact (no partial insertions), so the expansion is meltdown-free.
+
+\paragraph{Completeness of Assignment (Surjectivity).}
+We claim that \emph{every} code $C_k$ is eventually assigned to some node at a finite depth.
+Indeed, at depth $d$, we place exactly $r_d = 2^{d+1}$ codes (unless fewer remain). Thus,
+\[
+  \sum_{d=0}^{\infty} 2^{d+1} 
+  \;=\; 
+  2 \sum_{d=0}^{\infty} 2^d 
+  \;=\; 
+  \infty,
+\]
+so there is \emph{sufficient capacity} to accommodate infinitely many codes. 
+Concretely, for any $k$, pick $D$ large enough so that 
+$\sum_{d=0}^D 2^{d+1} \;\ge\; k$, ensuring $C_k$ appears in one of the next chunks. 
+Hence every code $C_k$ is assigned exactly once at some finite stage $d$, 
+and \emph{every} object $\{C_k\}$ appears in the tree.
+
+\smallskip
+\noindent
+Therefore, this procedure preserves perfect balance (the pivot + subtree step) 
+and avoids re-labeling at each level, embedding the entire countably infinite family 
+in a meltdown-free manner, as claimed.
+\end{proof}
+
+\noindent
+\textbf{Conclusion of Theorem~\ref{thm:univenum}:}
+Because each depth-$d$ step adds $2^{d+1}$ new nodes and assigns up to $2^{d+1}$ codes,
+the geosodic tree \emph{universally enumerates} any countably infinite set. 
+No old labels are disturbed, no collisions occur, and the minimal meltdown-free increments 
+uphold perfect balance throughout.
+
