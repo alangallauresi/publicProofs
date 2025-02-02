@@ -23,7 +23,8 @@ If you use this work, please cite it as:
 
 @article{gallauresi2025countdown,
   author    = {Alan Gallauresi},
-  title     = {Meltdown-Free Embedding of the Countdown Puzzle in Geosodic Structures},
+  title     = {Meltdown-Free Expansions: Countdown to A Paradigm-Shifting Framework for Irreversible AI, ML, and
+Law},
   year      = {2025},
   archivePrefix = {Zenodo},
   url       = {https://github.com/publicproofs/countdown}
