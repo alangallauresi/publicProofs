@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1738547419.66727 "d:/PublicProofs/src/publicProofs/Countdown/main.tex" "main.pdf" "main" 1738547427.39021 0
+["pdflatex"] 1738547602.42535 "d:/PublicProofs/src/publicProofs/Countdown/main.tex" "main.pdf" "main" 1738547612.94978 0
   "C:/Users/alan/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1738511100 186066 c797610d3c7aadc509276bf4bcd8a24b ""
   "C:/Users/alan/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1737829771 12012909 252cba1692126f8f97121500c6d7b1d9 ""
   "C:/Users/alan/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_25tcsq.enc" 1497089888 2921 8ca0eb0831f9bc5da080d3697cfe67bf ""
@@ -192,11 +192,11 @@
   "C:/Users/alan/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/alan/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "C:/Users/alan/AppData/Local/Programs/MiKTeX/tex/latex/xstring/xstring.sty" 1693735632 123 a302f2c651a95033260db60e51527ae8 ""
-  "comment.cut" 1738547426 797 27ffe729f9fadea66f7e95a719faf2a7 "pdflatex"
-  "d:/PublicProofs/src/publicProofs/Countdown/main.tex" 1738547406 14794 6c390746504e3d84fde888b2ba026812 ""
-  "main.aux" 1738547427 4841 f85a70907759794a0d04efca1c57632d "pdflatex"
-  "main.out" 1738547427 5308 ec5e15cfb4259229f7fbbae8b0f0de1c "pdflatex"
-  "main.tex" 1738547406 14794 6c390746504e3d84fde888b2ba026812 ""
+  "comment.cut" 1738547612 797 27ffe729f9fadea66f7e95a719faf2a7 "pdflatex"
+  "d:/PublicProofs/src/publicProofs/Countdown/main.tex" 1738547583 14800 becc3bfe5f5eb1b9b8488d3c087787a1 ""
+  "main.aux" 1738547612 4841 f85a70907759794a0d04efca1c57632d "pdflatex"
+  "main.out" 1738547612 5308 ec5e15cfb4259229f7fbbae8b0f0de1c "pdflatex"
+  "main.tex" 1738547583 14800 becc3bfe5f5eb1b9b8488d3c087787a1 ""
   (generated)
   "comment.cut"
   "main.aux"
