@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{1}
+\begin{thebibliography}{3}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -36,14 +36,47 @@
 \providecommand\natexlab[1]{#1}
 \providecommand\showeprint[2][]{arXiv:#2}
 
+\bibitem[Author(2025)]%
+        {geosodicPaper2025}
+\bibfield{author}{\bibinfo{person}{N. Author}.}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{On Geosodic Layering in Irreversible Trees}.
+\newblock \bibinfo{journal}{\emph{Irreversible Computation Journal}}
+  \bibinfo{volume}{10}, \bibinfo{number}{2} (\bibinfo{year}{2025}),
+  \bibinfo{pages}{1--22}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.5281/zenodo.14790163}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Futurism.com(2023)]%
+        {futurism2023blog}
+\bibfield{author}{\bibinfo{person}{Futurism.com}.}
+  \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Redefining Growth: Is Cheaper Expansion the Key to
+  AI?}
+\newblock \bibinfo{howpublished}{Blog Post}.
+\newblock
+\urldef\tempurl%
+\url{https://futurism.com/cheaper-expansion-key-to-ai}
+\showURL{%
+\tempurl}
+
+
 \bibitem[Kunen(1980)]%
         {kunen1980settheory}
 \bibfield{author}{\bibinfo{person}{Kenneth Kunen}.}
   \bibinfo{year}{1980}\natexlab{}.
 \newblock \bibinfo{booktitle}{\emph{Set Theory: An Introduction to Independence
   Proofs}}.
-\newblock \bibinfo{publisher}{North-Holland}, \bibinfo{address}{Amsterdam}.
+\newblock \bibinfo{publisher}{Elsevier}.
 \newblock
+\urldef\tempurl%
+\url{https://www.elsevier.com/books/set-theory/kunen/978-0-444-85401-9}
+\showURL{%
+\tempurl}
 
 
 \end{thebibliography}

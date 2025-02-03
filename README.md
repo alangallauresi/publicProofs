@@ -18,7 +18,7 @@ If you use this work, please cite it as:
   title     = {The Geosodic Tree: Canonical Meltdown-Free Expansions},
   year      = {2025},
   archivePrefix = {Zenodo},
-  url       = {https://github.com/publicproofs/geosodic}
+  url       = {https://doi.org/10.5281/zenodo.14790163}
 }
 
 @article{gallauresi2025countdown,
