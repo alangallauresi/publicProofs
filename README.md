@@ -26,5 +26,5 @@ If you use this work, please cite it as:
   title     = {Countdown to Meltdown-Free Expansions: Pinions, Puzzle Embeddings, and a Paradigm-Shifting Framework for Irreversible AI, ML, and Law},
   year      = {2025},
   archivePrefix = {Zenodo},
-  url       = {https://github.com/publicproofs/countdown}
+  url       = {https://doi.org/10.5281/zenodo.14791423}
 }
