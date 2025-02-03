@@ -9,6 +9,9 @@ This repository contains the formal proof of the **Geosodic Tree** https://githu
 
 It also includes the **Countdown Proof** https://github.com/alangallauresi/publicProofs/raw/main/Countdown/main.pdf, which rigorously embeds all Countdown expressions into a depth-5 meltdown-free tree, proving injectivity and structural integrity.  
 
+## Contact
+alan.gallauresi@gmail.com
+
 ## 📜 Citation  
 If you use this work, please cite it as:  
 
