@@ -5,9 +5,9 @@ For commercial inquiries, contact alan.gallauresi@gmail.com.
 
 # Various Pinion Theory Proofs
 
-This repository contains the formal proof of the **Geosodic Tree** https://github.com/alangallauresi/publicProofs/raw/main/Geosodic/main.pdf, a meltdown-free expansion structure ensuring irreversible, balanced growth in computational models. 
+This repository contains the formal proof of the **Geosodic Tree** (cite version: https://doi.org/10.5281/zenodo.14790163 | git repo version: https://github.com/alangallauresi/publicProofs/raw/main/Geosodic/main.pdf), a meltdown-free expansion structure ensuring irreversible, balanced growth in computational models. 
 
-It also includes the **Countdown Proof** https://github.com/alangallauresi/publicProofs/raw/main/Countdown/main.pdf, which rigorously embeds all Countdown expressions into a depth-5 meltdown-free tree, proving injectivity and structural integrity.  
+It also includes the **Countdown Proof** (cite version: https://doi.org/10.5281/zenodo.14791423 | git repo version: https://github.com/alangallauresi/publicProofs/raw/main/Countdown/main.pdf), which rigorously embeds all Countdown expressions into a depth-5 meltdown-free tree, proving injectivity and structural integrity.  
 
 ## Contact
 alan.gallauresi@gmail.com
