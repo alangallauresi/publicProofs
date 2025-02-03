@@ -7,7 +7,7 @@ For commercial inquiries, contact alan.gallauresi@gmail.com.
 
 This repository contains the formal proof of the **Geosodic Tree** https://github.com/alangallauresi/publicProofs/raw/main/Geosodic/main.pdf, a meltdown-free expansion structure ensuring irreversible, balanced growth in computational models. 
 
-It also includes the **Countdown Proof** https://github.com/alangallauresi/publicProofs/raw/main/countdown/main.pdf, which rigorously embeds all Countdown expressions into a depth-5 meltdown-free tree, proving injectivity and structural integrity.  
+It also includes the **Countdown Proof** https://github.com/alangallauresi/publicProofs/raw/main/Countdown/main.pdf, which rigorously embeds all Countdown expressions into a depth-5 meltdown-free tree, proving injectivity and structural integrity.  
 
 ## 📜 Citation  
 If you use this work, please cite it as:  
@@ -23,8 +23,7 @@ If you use this work, please cite it as:
 
 @article{gallauresi2025countdown,
   author    = {Alan Gallauresi},
-  title     = {Meltdown-Free Expansions: Countdown to A Paradigm-Shifting Framework for Irreversible AI, ML, and
-Law},
+  title     = {Countdown to Meltdown-Free Expansions: Pinions, Puzzle Embeddings, and a Paradigm-Shifting Framework for Irreversible AI, ML, and Law},
   year      = {2025},
   archivePrefix = {Zenodo},
   url       = {https://github.com/publicproofs/countdown}
