@@ -1,13 +1,19 @@
 #!/bin/bash
 
-# Update and install necessary packages
+# Ensure system updates & required packages
 apt-get update && apt-get install -y curl
 
-# Create necessary directories
+# Set working directory
+cd /workspace/webui || exit 1
+
+# Ensure necessary directories exist
 mkdir -p /workspace/webui/pipelines
 
-# Start Pipelines in the background
-nohup /app/pipelines &
+# Start Pipelines properly & wait for it to initialize
+nohup /app/pipelines > /workspace/webui/pipelines.log 2>&1 &
 
-# Start Open WebUI
-/app/open-webui
+# Give Pipelines time to start before launching WebUI
+sleep 5
+
+# Start Open WebUI in foreground (so Vast.ai doesn't kill the process)
+exec /app/open-webui
