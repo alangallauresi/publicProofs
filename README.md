@@ -1,7 +1,7 @@
 # publicProofs
 
-This work is licensed under CC BY-NC-SA 4.0. See LICENSE for details.
-For commercial inquiries, contact alan.gallauresi@gmail.com.
+This work is licensed under CC BY-NC-SA 4.0 and Pinionic copy"consent" terms: 
+https://pinions.atlassian.net/wiki/external/MDExZmY5ZTA2NmI0NGJlZmJiNDBmZjIyMWIzOWM5ODU
 
 # Various Pinion Theory Proofs
 
