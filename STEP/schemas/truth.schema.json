@@ -1,0 +1,57 @@
+{
+
+
+  "$id": "https://1F-0E-AD.alangallauresi.net/schemas/truth.schema.json?v=1.0.0",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pinion Truth Declaration",
+  "type": "object",
+  "required": ["id", "statement", "declared_by", "epsilon", "depth", "execution"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique truth ID (e.g., TRU-YYYYMMDD-###)"
+    },
+    "statement": {
+      "type": "string",
+      "description": "The semantic truth being declared"
+    },
+    "declared_by": {
+      "type": "string"
+    },
+    "epsilon": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Tolerance level (0 = rigid, 1 = freeform)"
+    },
+    "depth": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "execution": {
+      "type": "string",
+      "enum": ["assumed", "validated"]
+    },
+    "inherits_from": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of truth IDs this statement derives from"
+    },
+    "lens": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lens IDs applied to this truth"
+    },
+    "witnesses": {
+      "type": "array",
+      "items": {
+        "$ref": "witness.schema.json"
+      }
+    }
+  }
+}
+

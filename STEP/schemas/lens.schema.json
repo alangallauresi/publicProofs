@@ -1,0 +1,23 @@
+{
+  "$id": "https://alangallauresi.net/schemas/lens.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pinion Lens Definition",
+  "type": "object",
+  "required": ["lens_id", "domain", "tolerance_range", "description"],
+  "properties": {
+    "lens_id": { "type": "string" },
+    "domain": { "type": "string" },
+    "description": { "type": "string" },
+    "tolerance_range": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" }
+      }
+    },
+    "applies_to": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
