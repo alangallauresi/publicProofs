@@ -22,7 +22,7 @@
       "type": "number",
       "minimum": 0,
       "maximum": 1,
-      "description": "Tolerance level (0 = rigid, 1 = freeform)"
+      "description": "Tolerance level(0 = rigid, 1 = freeform)"
     },
     "depth": {
       "type": "integer",
