@@ -28,8 +28,6 @@
 *.temp
 *.sav
 
-
-
 # Latexmk build directory (if used)
 _latexmk/
 
@@ -40,3 +38,7 @@ _latexmk/
 # MacOS & system-specific files
 .DS_Store
 Thumbs.db
+
+# Ignore the STEP training data private folder
+
+/STEP/training_data_private/
