@@ -9,6 +9,31 @@ This repository contains the formal proof of the **Geosodic Tree** (cite version
 
 It also includes the **Countdown Proof** (cite version: https://doi.org/10.5281/zenodo.14791423 | git repo version: https://github.com/alangallauresi/publicProofs/raw/main/Countdown/main.pdf), which rigorously embeds all Countdown expressions into a depth-5 meltdown-free tree, proving injectivity and structural integrity.  
 
+# The Overlap Codes
+## 🧠 Binary–Gray Recursive Overlap Analysis
+https://github.com/alangallauresi/publicProofs/blob/main/Binary_Gray_Comparison_With_Summary.xlsx
+This repository contains a multi-depth Excel workbook analyzing the structural overlaps between:
+
+- **Binary**
+- **Binary Reversed**
+- **Gray Code**
+- **Gray Reversed**
+
+across depths of `2^n` where `n = 1` to `6`.
+
+---
+
+### 📐 Formulaic Insight
+
+For each depth `n`, the number of entries in which **two or more representations** are either:
+
+- **exactly equal**, or  
+- **differ by exactly one bit**
+
+follows a recursive pattern of accelerating overlap:
+
+
+
 ## Contact
 alan.gallauresi@gmail.com
 
@@ -31,3 +56,4 @@ If you use this work, please cite it as:
   archivePrefix = {Zenodo},
   url       = {https://doi.org/10.5281/zenodo.14791423}
 }
+
