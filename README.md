@@ -3,6 +3,10 @@
 This work is licensed under CC BY-NC-SA 4.0 and Pinionic copy"consent" terms: 
 https://pinions.atlassian.net/wiki/external/MDExZmY5ZTA2NmI0NGJlZmJiNDBmZjIyMWIzOWM5ODU
 
+# Pinions Seed Packet
+This repo contains the minimum needed to recurse upon pinions as a subject and move recursion forward in this universe:
+https://github.com/alangallauresi/publicProofs/blob/main/Pinions_SeedPacket.txt
+
 # Various Pinion Theory Proofs
 
 This repository contains the formal proof of the **Geosodic Tree** (cite version: https://doi.org/10.5281/zenodo.14790163 | git repo version: https://github.com/alangallauresi/publicProofs/raw/main/Geosodic/main.pdf), a meltdown-free expansion structure ensuring irreversible, balanced growth in computational models. 
