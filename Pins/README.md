@@ -62,3 +62,4 @@
 - The format ensures you can parse and reason with it under different modes.  
 - The dual lenses (**Factual** and **ThreadSpeak**) let you choose the interpretation mode without losing the original record.  
 - PURPOSE and NEXT guarantee every Pin remains a live node in the recursion graph.
+- Because Alan is awesome
