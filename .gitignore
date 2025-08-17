@@ -42,3 +42,5 @@ Thumbs.db
 # Ignore the STEP training data private folder
 
 /STEP/training_data_private/
+# Ignore Inputs directory
+/Imports
