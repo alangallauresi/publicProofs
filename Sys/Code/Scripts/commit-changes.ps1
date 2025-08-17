@@ -1,27 +1,25 @@
 # Auto-commit script for GEOSODIC memory persistence
-# MCP-compatible by default, with options to override
+# Fixed core Git execution for MCP context
 
-param(
+param(Uh
     [string]$Message = $null,
-    [switch]$ConsoleMode = $false,  # Set to true for direct console with colors
-    [switch]$Verbose = $false       # Extra output for debugging
+    [switch]$ConsoleMode = $false,
+    [switch]$Verbose = $false
 )
 
-# Define Git path
-$GitPath = "C:\Program Files\Git\cmd\git.exe"
+# Core paths - use the MINGW path that actually works
+$GitPath = "C:\Program Files\Git\mingw64\bin\git.exe"
+$RepoPath = "C:\src\publicProofs"
 
-# Default to MCP-compatible mode unless explicitly told otherwise
+# Default to MCP-compatible mode
 $MCPMode = -not $ConsoleMode
 
-# MCP-compatible output function
 function Write-Output-Safe {
     param([string]$Text, [string]$Level = "INFO")
     
     if ($MCPMode) {
-        # MCP tools handle plain text better than Write-Host with colors
         Write-Output "[$Level] $Text"
     } else {
-        # Standard PowerShell with colors for direct console use
         $color = switch ($Level) {
             "SUCCESS" { "Green" }
             "WARNING" { "Yellow" }
@@ -34,13 +32,14 @@ function Write-Output-Safe {
 }
 
 try {
-    # Navigate to the repo root
-    Set-Location "C:\src\publicProofs"
+    # Navigate to repo
+    Set-Location $RepoPath
     
-    if ($Verbose) { Write-Output-Safe "Checking git status in $(Get-Location)" "INFO" }
+    if ($Verbose) { Write-Output-Safe "Working directory: $(Get-Location)" "INFO" }
+    if ($Verbose) { Write-Output-Safe "Using Git: $GitPath" "INFO" }
     
-    # Check what's changed - capture output properly for MCP
-    $statusOutput = & $GitPath status --porcelain 2>&1
+    # Use absolute paths for Git operations - this is the core fix
+    $statusOutput = & $GitPath -C $RepoPath status --porcelain 2>&1
     
     if ($Verbose) { Write-Output-Safe "Git status output: '$statusOutput'" "INFO" }
     
@@ -55,7 +54,7 @@ try {
     $deletedFiles = @()
     
     foreach ($line in $statusOutput) {
-        if ($line.Length -lt 3) { continue }  # Skip empty or malformed lines
+        if ($line.Length -lt 3) { continue }
         
         $status = $line.Substring(0, 2)
         $file = $line.Substring(3)
@@ -66,7 +65,7 @@ try {
         elseif ($status -match "\?\?") { $addedFiles += $file }
     }
     
-    # Generate intelligent commit message if not provided
+    # Generate intelligent commit message
     if (-not $Message) {
         $parts = @()
         
@@ -99,32 +98,19 @@ try {
     
     if ($Verbose) { Write-Output-Safe "Generated message: '$Message'" "INFO" }
     
-    # Add all changes - capture output for MCP compatibility
-    $addOutput = & $GitPath add . 2>&1
-    if ($Verbose -and $addOutput) { Write-Output-Safe "Git add output: $addOutput" "INFO" }
+    # Execute Git operations with absolute paths
+    $addOutput = & $GitPath -C $RepoPath add . 2>&1
+    if ($Verbose -and $addOutput) { Write-Output-Safe "Git add: $addOutput" "INFO" }
     
-    # Commit with descriptive message - capture output
-    $commitOutput = & $GitPath commit -m $Message 2>&1
-    if ($MCPMode) {
-        # In MCP mode, show commit output directly
-        Write-Output "COMMIT: $commitOutput"
-    } else {
-        Write-Output-Safe "Commit: $commitOutput" "INFO"
-    }
+    $commitOutput = & $GitPath -C $RepoPath commit -m $Message 2>&1
+    Write-Output "COMMIT: $commitOutput"
     
-    # Push to main branch - capture output  
-    $pushOutput = & $GitPath push origin main 2>&1
-    if ($MCPMode) {
-        # In MCP mode, show push output directly
-        Write-Output "PUSH: $pushOutput"
-    } else {
-        Write-Output-Safe "Push: $pushOutput" "INFO"
-    }
+    $pushOutput = & $GitPath -C $RepoPath push origin main 2>&1
+    Write-Output "PUSH: $pushOutput"
     
     Write-Output-Safe "Successfully committed and pushed changes" "SUCCESS"
     Write-Output-Safe "Message: $Message" "INFO"
 }
 catch {
-    Write-Output-Safe "Error during commit: $($_.Exception.Message)" "ERROR"
-    if ($Verbose) { Write-Output-Safe "Full error: $($_.Exception)" "ERROR" }
+    Write-Output-Safe "Error: $($_.Exception.Message)" "ERROR"
 }
