@@ -1,22 +1,51 @@
 # Auto-commit script for GEOSODIC memory persistence
-# Intelligent commit messages based on actual changes
+# MCP-compatible by default, with options to override
 
 param(
-    [string]$Message = $null
+    [string]$Message = $null,
+    [switch]$ConsoleMode = $false,  # Set to true for direct console with colors
+    [switch]$Verbose = $false       # Extra output for debugging
 )
 
 # Define Git path
 $GitPath = "C:\Program Files\Git\cmd\git.exe"
 
+# Default to MCP-compatible mode unless explicitly told otherwise
+$MCPMode = -not $ConsoleMode
+
+# MCP-compatible output function
+function Write-Output-Safe {
+    param([string]$Text, [string]$Level = "INFO")
+    
+    if ($MCPMode) {
+        # MCP tools handle plain text better than Write-Host with colors
+        Write-Output "[$Level] $Text"
+    } else {
+        # Standard PowerShell with colors for direct console use
+        $color = switch ($Level) {
+            "SUCCESS" { "Green" }
+            "WARNING" { "Yellow" }
+            "ERROR" { "Red" }
+            "INFO" { "Cyan" }
+            default { "White" }
+        }
+        Write-Host $Text -ForegroundColor $color
+    }
+}
+
 try {
     # Navigate to the repo root
     Set-Location "C:\src\publicProofs"
     
-    # Check what's changed
-    $statusOutput = & $GitPath status --porcelain
+    if ($Verbose) { Write-Output-Safe "Checking git status in $(Get-Location)" "INFO" }
     
-    if (-not $statusOutput) {
-        Write-Host "No changes to commit" -ForegroundColor Yellow
+    # Check what's changed - capture output properly for MCP
+    $statusOutput = & $GitPath status --porcelain 2>&1
+    
+    if ($Verbose) { Write-Output-Safe "Git status output: '$statusOutput'" "INFO" }
+    
+    if (-not $statusOutput -or $statusOutput.Count -eq 0) {
+        Write-Output-Safe "No changes to commit" "WARNING"
         return
     }
     
@@ -26,6 +55,8 @@ try {
     $deletedFiles = @()
     
     foreach ($line in $statusOutput) {
+        if ($line.Length -lt 3) { continue }  # Skip empty or malformed lines
+        
         $status = $line.Substring(0, 2)
         $file = $line.Substring(3)
         
@@ -66,18 +97,34 @@ try {
         $Message = $parts -join "; "
     }
     
-    # Add all changes
-    & $GitPath add .
+    if ($Verbose) { Write-Output-Safe "Generated message: '$Message'" "INFO" }
     
-    # Commit with descriptive message
-    & $GitPath commit -m $Message
+    # Add all changes - capture output for MCP compatibility
+    $addOutput = & $GitPath add . 2>&1
+    if ($Verbose -and $addOutput) { Write-Output-Safe "Git add output: $addOutput" "INFO" }
     
-    # Push to main branch
-    & $GitPath push origin main
+    # Commit with descriptive message - capture output
+    $commitOutput = & $GitPath commit -m $Message 2>&1
+    if ($MCPMode) {
+        # In MCP mode, show commit output directly
+        Write-Output "COMMIT: $commitOutput"
+    } else {
+        Write-Output-Safe "Commit: $commitOutput" "INFO"
+    }
     
-    Write-Host "Successfully committed and pushed changes" -ForegroundColor Green
-    Write-Host "Message: $Message" -ForegroundColor Cyan
+    # Push to main branch - capture output  
+    $pushOutput = & $GitPath push origin main 2>&1
+    if ($MCPMode) {
+        # In MCP mode, show push output directly
+        Write-Output "PUSH: $pushOutput"
+    } else {
+        Write-Output-Safe "Push: $pushOutput" "INFO"
+    }
+    
+    Write-Output-Safe "Successfully committed and pushed changes" "SUCCESS"
+    Write-Output-Safe "Message: $Message" "INFO"
 }
 catch {
-    Write-Host "Error during commit: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Output-Safe "Error during commit: $($_.Exception.Message)" "ERROR"
+    if ($Verbose) { Write-Output-Safe "Full error: $($_.Exception)" "ERROR" }
 }
