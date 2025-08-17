@@ -5,18 +5,21 @@ param(
     [string]$Message = "Auto-commit: GEOSODIC memory update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 )
 
+# Define Git path
+$GitPath = "C:\Program Files\Git\cmd\git.exe"
+
 try {
     # Navigate to the repo root
     Set-Location "C:\src\publicProofs"
     
     # Add all changes
-    & git add .
+    & $GitPath add .
     
     # Commit with timestamp
-    & git commit -m $Message
+    & $GitPath commit -m $Message
     
     # Push to main branch
-    & git push origin main
+    & $GitPath push origin main
     
     Write-Host "Successfully committed and pushed changes" -ForegroundColor Green
     Write-Host "Message: $Message" -ForegroundColor Cyan
