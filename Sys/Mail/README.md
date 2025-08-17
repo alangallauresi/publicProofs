@@ -1,1 +1,1 @@
-Information will go here on mail format 
+Information will go here on mail format here

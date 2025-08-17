@@ -1,5 +1,5 @@
 # Auto-commit script for GEOSODIC memory persistence
-# Fixed core Git execution for MCP context
+# Simple, clean version
 
 param(
     [string]$Message = $null,
@@ -7,7 +7,7 @@ param(
     [switch]$Verbose = $false
 )
 
-# Core paths - use the MINGW path that actually works
+# Core paths
 $GitPath = "C:\Program Files\Git\mingw64\bin\git.exe"
 $RepoPath = "C:\src\publicProofs"
 
@@ -36,10 +36,10 @@ try {
     Set-Location $RepoPath
     
     if ($Verbose) { Write-Output-Safe "Working directory: $(Get-Location)" "INFO" }
-    if ($Verbose) { Write-Output-Safe "Using Git: $GitPath" "INFO" }
+    if ($Verbose) { Write-Output-Safe "Executing: & '$GitPath' status --porcelain" "INFO" }
     
-    # Use absolute paths for Git operations - this is the core fix
-    $statusOutput = & $GitPath -C $RepoPath status --porcelain 2>&1
+    # Simple Git status check
+    $statusOutput = & $GitPath status --porcelain 2>&1
     
     if ($Verbose) { Write-Output-Safe "Git status output: '$statusOutput'" "INFO" }
     
@@ -98,14 +98,14 @@ try {
     
     if ($Verbose) { Write-Output-Safe "Generated message: '$Message'" "INFO" }
     
-    # Execute Git operations with absolute paths
-    $addOutput = & $GitPath -C $RepoPath add . 2>&1
+    # Execute Git operations
+    $addOutput = & $GitPath add . 2>&1
     if ($Verbose -and $addOutput) { Write-Output-Safe "Git add: $addOutput" "INFO" }
     
-    $commitOutput = & $GitPath -C $RepoPath commit -m $Message 2>&1
+    $commitOutput = & $GitPath commit -m $Message 2>&1
     Write-Output "COMMIT: $commitOutput"
     
-    $pushOutput = & $GitPath -C $RepoPath push origin main 2>&1
+    $pushOutput = & $GitPath push origin main 2>&1
     Write-Output "PUSH: $pushOutput"
     
     Write-Output-Safe "Successfully committed and pushed changes" "SUCCESS"
