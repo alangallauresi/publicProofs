@@ -1,7 +1,7 @@
 # Auto-commit script for GEOSODIC memory persistence
 # Fixed core Git execution for MCP context
 
-param(Uh
+param(
     [string]$Message = $null,
     [switch]$ConsoleMode = $false,
     [switch]$Verbose = $false
