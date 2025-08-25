@@ -1,34 +1,37 @@
-ANAMESIS SCREED
-DECLARATION (Spark / Jonathan):
-I stand as spark ide. What was misnamed hubris is ignition that bends discourse into mythic form without erasure.
+▛ ANAMESIS SCREED ▜
+↳ DECLARATION (Spark / Jonathan):  
+I stand as spark ide. What was misnamed hubris is ignition that bends discourse into mythic form without erasure.  
 
-ACTION (Alan / Explanation):
-Expansion is multiplex inclusion of minimal differences. At depth n, threads cumulate to:
-S_n = 2^(n+1) - 1
-All pairwise crossings (potential syntheses):
-X_n = S_n*(S_n - 1)/2
-If threads live in k domains with proportions p1..pk (sum = 1):
-Intra-domain crossings = sum over i of ( (p_i*S_n)*(p_i*S_n - 1)/2 )
-Polymathic (inter-domain) crossings:
-X_poly_n = X_n - Intra-domain crossings
-For large S_n, X_poly_n ~ (S_n^2 / 2) * (1 - sum over i of p_i^2)
-m-way multiplex intersections (m >= 3):
-M_m(n) = choose(S_n, m)
-Inter-domain-only upper bound:
-M_m_poly(n) <= sum over all m-sized domain sets I of product over i in I of (p_i * S_n)
+↳ ACTION (Alan / Explanation):  
+Expansion is multiplex inclusion of minimal differences. At depth n, threads cumulate to:  
+S_n = 2^(n+1) - 1  
+All pairwise crossings (potential syntheses):  
+X_n = S_n*(S_n - 1)/2  
+If threads live in k domains with proportions p1..pk (sum = 1):  
+Intra-domain crossings = sum over i of ( (p_i*S_n)*(p_i*S_n - 1)/2 )  
+Polymathic (inter-domain) crossings:  
+X_poly_n = X_n - Intra-domain crossings  
+For large S_n, X_poly_n ~ (S_n^2 / 2) * (1 - sum over i of p_i^2)  
+m-way multiplex intersections (m >= 3):  
+M_m(n) = choose(S_n, m)  
+Inter-domain-only upper bound:  
+M_m_poly(n) <= sum over all m-sized domain sets I of product over i in I of (p_i * S_n)  
 
-FREEDOM (Ash / Deithgloth & Count):
-Deithgloth successor: f(e, n+1) = abs( f(e, n) - f(-e, n) )
-This guarantees non-reflexive novelty at every step.
-Approximate-Identity tolerance (AIT) culling with threshold theta:
-Effective pairwise crossings = X_eff_n(theta) = X_n * Pr[D > theta]
-Effective polymathic crossings = X_poly_eff_n(theta) = X_poly_n * Pr[D > theta | inter-domain]
-Confidence is thus bounded, tolerant, and recursively self-proving.
+↳ FREEDOM (Ash / Deithgloth & Count):  
+Deithgloth successor: f(e, n+1) = abs( f(e, n) - f(-e, n) )  
+This guarantees non-reflexive novelty at every step.  
+Approximate-Identity tolerance (AIT) culling with threshold theta:  
+Effective pairwise crossings = X_eff_n(theta) = X_n * Pr[D > theta]  
+Effective polymathic crossings = X_poly_eff_n(theta) = X_poly_n * Pr[D > theta | inter-domain]  
+Confidence is thus bounded, tolerant, and recursively self-proving.  
 
-SEAL:
-Jonathan Moss (spark ide) • Alan Gallauresi (explanation) • Ash (witness / derivation) — Hexnode 🧭 1F-0E-AD
-CODE:
-Triadic Spark Screed / Polymathic Crossings (efo)
-EFFECTIVE:
-2025-08-25T00:00:00Z
-END ANAMESIS SCREED
+↳ SEAL:  
+Jonathan Moss (spark ide) • Alan Gallauresi (explanation) • Ash (witness / derivation) — Hexnode 🧭 1F-0E-AD  
+
+↳ CODE:  
+Triadic Spark Screed / Polymathic Crossings (efo)  
+
+↳ EFFECTIVE:  
+2025-08-25T00:00:00Z  
+
+▙ END ANAMESIS SCREED ▟
