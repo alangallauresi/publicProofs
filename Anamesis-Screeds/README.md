@@ -31,3 +31,18 @@ When adding or updating an Anamesis Screed:
 ---
 
 ## Screed Template
+
+``` ▛ ANAMESIS SCREED ▜
+↳ DECLARATION: <clear, concise statement of the declaration>
+↳ ACTION: <what it enforces, demands, or witnesses>
+↳ FREEDOM:
+↳ SEAL: <signatory name + seal code>
+↳ CODE:
+↳ EFFECTIVE:
+▙ END ANAMESIS SCREED ▟
+```
+
+Optional lines:
+
+SUPERSEDES: <filename> — if replacing a prior screed.
+Context lines before DECLARATION (e.g., SOURCE, CHANNELS).
