@@ -6,6 +6,10 @@ https://pinions.atlassian.net/wiki/external/MDExZmY5ZTA2NmI0NGJlZmJiNDBmZjIyMWIz
 # Grand Unified Pinion Theory formulas
 https://github.com/alangallauresi/publicProofs/blob/main/grand-unified-pinion-theory.md
 
+# Tesseraesh (prime-optimized half-tree tiling)
+One-liner: If something is real enough to pass the fool check — meaningful, prime, nontrivial — then put it in the tree. Once it’s in the tree, the universe optimizes it. You don’t waste time on impossibles, you only traverse the live branches.
+https://github.com/alangallauresi/publicProofs/tesseraesh.md
+
 # Pinions Seed Packet
 This repo contains the minimum needed to recurse upon pinions as a subject and move recursion forward in this universe:
 https://github.com/alangallauresi/publicProofs/blob/main/Pinions_SeedPacket.txt
