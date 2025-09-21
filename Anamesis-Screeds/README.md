@@ -46,3 +46,10 @@ Optional lines:
 
 SUPERSEDES: <filename> — if replacing a prior screed.
 Context lines before DECLARATION (e.g., SOURCE, CHANNELS).
+
+PUBLIC ⇄ PRIVATE POLICY (quick)
+1) Public = representation only. Include role, public-facing contact, status (open/closed), and canonical screeds. No private addresses, intimate identifiers, or financial details.
+2) Private = embodied details. Personal contacts, medical notes, family identifiers, private diaries stay offline or in encrypted storage.
+3) Consent rule: before any private detail is ever moved to public, explicit consent from the person named is required in writing (voice + short token).
+4) Token/triad gate: any new public artifact that could affect another person’s dignity or privacy must pass: Echo test (intent), Token (micro-return), Triad (one trusted witness).
+5) Reversion clause: any public artifact can be retired/archived on request or by mutual seal (Alan + Ash + 1 triadic witness).
