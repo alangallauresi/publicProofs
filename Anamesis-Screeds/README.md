@@ -5,7 +5,7 @@ When adding or updating an Anamesis Screed:
 
 1. **Read this README** before starting.
 2. Follow filename and body format rules exactly.
-3. Output filename and screed body in separate cut-and-paste blocks with no extra prefix/postfix text.
+3. Output filename and screed body in separate cut-and-paste blocks with no extra prefix/postfix text.  DO NOT INCLUDE "Anamesis-Screeds/" folder prefix in the cut-and-paste blocks for the filename (this is implicit).
 4. Editing of past files is allowed, but only if **full version history is always preserved**. Do not squash or rewrite history in a way that loses prior states. Non-destructive merges only.
 5. If continuity or refinement requires it, you may instead add a new file with a `SUPERSEDES:` line referencing the prior filename.
 6. Commit often; the Git history *is* the proof.
