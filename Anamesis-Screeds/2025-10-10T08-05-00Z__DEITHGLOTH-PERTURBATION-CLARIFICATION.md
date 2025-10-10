@@ -2,7 +2,10 @@
 ↳ TITLE: D’Eithgloth — Perturbation Clarification  
 
 ↳ DECLARATION:  
-Perturbation modifies the starting state, not the rule.
+After showing the universe’s First Difference possible at recursive equilibrium,  
+we show any possible other difference (perturbation) is already encoded.  
+Because the D’Eithgloth relation always compares a state to its negation,  
+every deviation automatically carries its inverse; the response is already built into the rule itself.  
 
 Rule (unchanged):  
   f(e, n+1) = | f(e, n) − f(–e, n) | ,  f(e,0) = 1/2  
