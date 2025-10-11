@@ -11,16 +11,16 @@ Bridge Operator:      B(A) = | eval(A) − eval(¬A) | ∈ [0,1].
 D’Eithgloth rule:     f(e, n+1) = | f(e, n) − f(–e, n) | ,  with f(e, 0) = 1/2.
 
 ↳ PROOF (non-negativity):  
-1)  Since eval(A), eval(¬A) ∈ [0,1] and eval(¬A) = 1 − eval(A),  
-    B(A) = | eval(A) − (1 − eval(A)) | = | 2·eval(A) − 1 | ≥ 0.  
-2)  Therefore the bridge always yields a non-negative value in [0,1],  
-    read as the statement’s distance from perfect balance.
+1)  Because eval(A), eval(¬A) ∈ [0,1] and eval(¬A) = 1 − eval(A),  
+    B(A) = | eval(A) − (1 − eval(A)) | = |2·eval(A) − 1| ≥ 0.  
+2)  For strictly binary logic (A = 0 or 1), B(A) = 1 → maximal polarisation.  
+    Values near zero appear only in graded systems where p = 0.5.  
 
 ↳ PROOF (bounded positivity under D’Eithgloth):  
-3)  Let x₀ = 1/2 and perturb x₀ by ε determined from B(A): set f(e,0)=1/2+ε and f(–e,0)=1/2−ε with |2ε| = B(A).  
-4)  Apply the rule once: f(e,1) = | (1/2+ε) − (1/2−ε) | = |2ε| = B(A) ∈ [0,1].  
-    Magnitude is preserved, sign neutralized; the result remains in the positive, bounded interval.  
-5)  Reapplication continues to return values in [0,1]; no step can produce negativity or divergence because the absolute operator removes sign and the frame is anti-reflexive.  
+3)  Let f(e,0)=½+ε and f(–e,0)=½−ε with |2ε| = B(A).  
+4)  Apply the rule once: f(e,1)=|(½+ε)−(½−ε)|=|2ε|=B(A)∈[0,1].  
+5)  Reapplication remains within [0,1]; the map is signless and bounded.  
+    Convergence toward the midpoint requires an explicit update scheme; the claim here is positivity and boundedness, not monotonicity.
 
 ↳ INTERPRETATION:  
 The Bridge converts binary truth into a non-negative measure of coherence.  
